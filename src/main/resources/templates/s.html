@@ -1,8 +1,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <TITLE xmlns:th="www.thymeleaf.org">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><head>
 <title>淘商城</title>
 <meta name="keywords" content="" />
 <meta name="description" content="" />
@@ -44,13 +43,13 @@
                     <div class="search clear">
                         <div class="searchContainer">
                             <div class="searchselect">
-                                <span id="type" typename="tuan">团购</span><a class="searchselectbtn" href="javascript:void(0);">&nbsp;</a>
+                                <span id="type" typename="tuan">值得买</span><a class="searchselectbtn" href="javascript:void(0);">&nbsp;</a>
                                 <ul id=selectTypeList>
-                                    <li typename="tuan"><a href="javascript:void(0);">团购</a></li>
-                                    <li typename="item"><a href="javascript:void(0);">值得买</a> </li>
-                                    <li typename="promo"><a href="javascript:void(0);">促销</a> </li>
-                                    <li typename="store"><a href="javascript:void(0);">商家</a> </li>
-                                    <li typename="topic"><a href="javascript:void(0);">社区</a> </li>
+                                    <!--<li typename="tuan"><a href="javascript:void(0);">团购</a></li>-->
+                                    <!--<li typename="item"><a href="javascript:void(0);">值得买</a> </li>-->
+                                    <!--<li typename="promo"><a href="javascript:void(0);">促销</a> </li>-->
+                                    <!--<li typename="store"><a href="javascript:void(0);">商家</a> </li>-->
+                                    <!--<li typename="topic"><a href="javascript:void(0);">社区</a> </li>-->
                                     <li class=last></li>
                                 </ul>
                             </div>
@@ -238,16 +237,13 @@
         <div class="updown">
             <div class="fl">
             <p>排序：</p>
-            <a class="btn  on " href="#"><span class="up">默认</span></a>
-            <a class="btn  " href="#"><span class="up">最热</span></a>
-            <a class="btn  " href="#"><span class="up">最新</span></a>
+            <a class="btn  on " th:href="@{'showAll'(all=1)}"><span class="up">默认</span></a>
+                <a class="btn" th:href="@{'showAll'(pd_price=1)}"><span class="up">最热</span></a>
+                <a class="btn" th:href="@{'showAll'(pd_id=1)}"><span class="up">最新</span></a>
             </div>
-            <div class="fr">共 <span>2942</span> 件商品</div>
+            <div class="fr">共 <span th:text="${session.pages.getTotal()}"></span>件商品</div>
         </div>
-        
-        
-        
-        
+
         <!--stores-->
         <div class="clear " id="goods_container">
             <div class="item"  id="product_del_5264" th:each="s,state:${session.pd}">
@@ -286,14 +282,12 @@
 
         
         <!--pages-->
-        <div class="fenye clear" style="margin:20px 0;"><a href='#'>首页</a>
-            <a href='#'><</a><span class="current">1</span>
-            <a href='#'>2</a><a href='#'>3</a>
-            <a href='#'>4</a><a href='#'>5</a>
-            <a href='#'>6</a><a href='#'>7</a>
-            <a href='#'>8</a><a href='#'>9</a>
-            <a href='#'>10</a>...<a href='#'>74</a>
-            <a href='#'>></a><a href='#'>尾页</a></div>
+        <div class="fenye clear" style="margin:20px 0; ">
+            <a th:href="@{'showAll'(index=1)}" th:text="首页"></a>
+            <a th:href="@{'showAll'(index=${session.index-1})}" th:text="上一页"></a>
+            <a th:href="@{'showAll'(index=${session.index+1})}" th:text="下一页"></a>
+            <a th:href="@{'showAll'(index=3)}" th:text="尾页"></a>
+            </div>
         <!--pages-->
         
         <!--stores-->

@@ -30,23 +30,36 @@ public class searchController {
 
     //显示 主页面
     @RequestMapping("/showAll")
-    public String showAll(HttpSession session,String index,String pd_price,String pd_id,Integer vd_id,
+    public String showAll(HttpSession session,Integer index,String all,String pd_price,String pd_id,Integer vd_id,
     Integer pb_id,Integer pt_id){
         session.setAttribute("pt",seaService.findByPt()); //类型
         session.setAttribute("pb",seaService.findByPb()); //品牌
         session.setAttribute("vd",seaService.findByVd()); //地区
 
-        System.out.println("index01:"+pb_id);
         Product_details proD = new Product_details();
         proD.setVd_id(vd_id);      //卖家地区
         proD.setPb_id(pb_id);      //商品品牌
         proD.setPt_id(pt_id);      //商品类型
-        List<Page> pages = PageHelper.startPage(1,10);
+
+        if(index==null){
+            index = 1;
+        }
+        Page pages = null;
+        if(pd_price!=""&&pd_price!=null){     //最热销
+            pages =  PageHelper.startPage(index,10,"pd_price");
+        }
+        if(pd_id!=""&&pd_id!=null){           //最新品
+            pages =  PageHelper.startPage(index,10,"pd_id");
+        }
+        if(all!=""&&all!=null){               //默认
+            pages =  PageHelper.startPage(index,10,"pd_id");
+        }else {
+            pages =  PageHelper.startPage(index,10);
+        }
         List<Product_details> list =  seaService.findByPd(proD);
-        System.out.println("index02:"+list.size());
         session.setAttribute("pd",list);
+        session.setAttribute("index",index);
         session.setAttribute("pages",pages);
-//        session.setAttribute("vd",seaService.findByVd()); //地区
         return "s";
     }
 }
