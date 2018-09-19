@@ -1,0 +1,41 @@
+
+mybatis:
+  type-aliases-package: com.cssl.pojo
+  mapper-locations: classpath:com/cssl/dao/*.xml
+  configuration:
+    auto-mapping-behavior: full
+    use-generated-keys: true
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql:///taoshopping
+    username: root
+    password: sasa
+
+  jackson:
+    date-format: yyyy-MM-dd HH:mm
+    time-zone: GMT+8
+
+#thymeleaf start
+  thymeleaf:
+    encoding: UTF-8
+    #开发时关闭缓存,不然没法看到实时页面
+    cache: false
+
+    #默认是 classpath:/templates/
+#    prefix: classpath:/templates/
+#    suffix: .html
+
+server:
+  port: 8081
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+  pageSizeZero: true
+#thymeleaf end
+
+

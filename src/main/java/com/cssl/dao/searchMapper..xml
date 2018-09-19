@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cssl.dao.searchDao">
+
+
+
+    <!--查询商品  按照 地区vd_id  或者 类型 pt_id 或者   品牌pb_id  默认查询所有-->
+    <!--List<Product_details> findByPd(int vd_id,int pt_id,int pb_id);-->
+
+    <!--查询所有商品类型-->
+    <select id="findByPt" resultType="Product_type">
+        SELECT * FROM product_type
+    </select>
+    
+    <!--查询所有商品品牌-->
+    <select id="findByPb" resultType="Product_brand">
+        SELECT * FROM product_brand
+    </select>
+
+    <!--查询所有卖家地区-->
+    <select id="findByVd" resultType="Vendor_district">
+       SELECT * FROM vendor_district
+    </select>
+    
+    <select id="findByPd" resultType="Product_details">
+        SELECT * FROM Product_details p INNER JOIN vendor_district v
+        ON p.vd_id = v.vd_id
+        <where>
+            <if test="vd_id!=null">
+               and p.vd_id = #{vd_id}
+            </if>
+            <if test="pt_id!=null">
+               and pt_id = #{pt_id}
+            </if>
+            <if test="pb_id!=null">
+               and pb_id = #{pb_id}
+            </if>
+        </where>
+    </select>
+
+</mapper>
