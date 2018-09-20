@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cssl.dao.Product_typeMapper">
+
+       <!--商品品牌和商品信息-->
+       <resultMap id="product_brand" type="Product_brand">
+            <id column="pb_id" property="pb_id"/>
+            <collection property="pdlist" ofType="Product_details"/>
+       </resultMap>
+
+       <!--商品分类和商品品牌-->
+       <resultMap id="product_type" type="Product_type">
+            <id column="pt_id" property="pt_id"/>
+            <collection property="pblist" ofType="Product_brand"/>
+       </resultMap>
+
+       <!---->
+       <select id="sel_product_type" resultMap="product_type">
+            SELECT * FROM product_type pt
+            LEFT JOIN product_brand pb  ON pt.pt_id=pb.pt_id
+       </select>
+    
+</mapper>

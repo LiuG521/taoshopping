@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -61,5 +60,11 @@ public class searchController {
         session.setAttribute("index",index);
         session.setAttribute("pages",pages);
         return "s";
+    }
+
+    @RequestMapping("/ss")
+    public String slsl(){
+        System.out.println("12121");
+        return "user/shopping-cart";
     }
 }

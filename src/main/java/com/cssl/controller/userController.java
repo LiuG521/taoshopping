@@ -38,7 +38,7 @@ public class userController {
     @RequestMapping("/userLogin")
     public String userLogin(user user){
         if(usSerivce.userLogin(user)!=null){
-            return "index";
+            return "redirect:sel_product_type";
         }
         return "login";
     }

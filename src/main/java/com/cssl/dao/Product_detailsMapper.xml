@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cssl.dao.Product_detailsMapper">
+ 
+     <resultMap id="product_detailsbypt_id" type="Product_details">
+         <id property="pd_id" column="pd_id"/>
+         <collection property="pb" ofType="Product_brand"/>
+     </resultMap>
+    
+     <select id="sellistpdbypt_id" resultMap="product_detailsbypt_id">
+            SELECT * FROM product_details pd
+            LEFT JOIN product_brand pb
+            ON pd.pb_id=pb.pb_id
+            WHERE pd.pt_id=#{pt_id};
+     </select>
+    
+     <resultMap id="product_detailsbypd_id" type="Product_details">
+            <id column="pd_id" property="pd_id"/>
+            <collection property="pb" ofType="Product_brand"/>
+            <collection property="vd" ofType="Vendor_district"/>
+     </resultMap>
+
+     <select id="selpdbypd_id" resultMap="product_detailsbypd_id">
+             SELECT * FROM product_details pd
+             LEFT JOIN product_brand pb
+             ON pd.pb_id=pb.pb_id
+             LEFT JOIN vendor_district vd
+             ON pd.vd_id=vd.vd_id
+             WHERE pd.pd_id=#{pd_id}
+     </select>
+
+</mapper>

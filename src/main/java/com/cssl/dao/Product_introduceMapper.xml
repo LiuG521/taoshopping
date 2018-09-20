@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cssl.dao.Product_introduceMapper">
+
+        <select id="sellistpibypd_id" resultType="Product_introduce">
+                 SELECT * FROM product_introduce WHERE pd_id=#{pd_id}
+        </select>
+
+</mapper>
