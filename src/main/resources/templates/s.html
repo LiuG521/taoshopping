@@ -63,7 +63,7 @@
 
                 <div class="header_shopping_car mobile_none">
                     <div class="clear topcar">
-                        <div class="tuan_car_num fl"><a href="user/shopping-cart.html" >购物车 <span id="tuan_num">1</span> 件</a>
+                        <div class="tuan_car_num fl"><a href="user/shopping-cart.html" >购物车 <span id="tuan_num" th:text="${session.count}"></span> 件</a>
                         </div>
                         <div class="car_love fl"><a href="https://shop116998991.taobao.com" >我喜欢的</a>
                         </div>
@@ -238,9 +238,12 @@
         <div class="updown">
             <div class="fl">
             <p>排序：</p>
-            <a class="btn  on " th:href="@{'showAll'(all=1)}"><span class="up">默认</span></a>
-                <a class="btn" th:href="@{'showAll'(pd_price=1)}"><span class="up">最热</span></a>
-                <a class="btn" th:href="@{'showAll'(pd_id=1)}"><span class="up">最新</span></a>
+                <a th:if="${session.all}==null and ${session.pd_price} == null and ${session.pd_id}==null or ${session.all} == 1" class="btn on" th:href="@{'showAll'(all=1)}"><span class="up">默认</span></a>
+                <a th:if="${session.pd_price}==1 or ${session.pd_id}==1" class="btn" th:href="@{'showAll'(all=1)}"><span class="up">默认</span></a>
+                <a th:if="${session.pd_price}==1" class="btn on" th:href="@{'showAll'(pd_price=1)}"><span class="up">最热</span></a>
+                <a th:if="${session.pd_price}==null" class="btn" th:href="@{'showAll'(pd_price=1)}"><span class="up">最热</span></a>
+                <a th:if="${session.pd_id}==1" class="btn on" th:href="@{'showAll'(pd_id=1)}"><span class="up">最新</span></a>
+                <a th:if="${session.pd_id}==null" class="btn" th:href="@{'showAll'(pd_id=1)}"><span class="up">最新</span></a>
             </div>
             <div class="fr">共 <span th:text="${session.pages.getTotal()}"></span>件商品</div>
         </div>
@@ -267,7 +270,7 @@
                 <span class="tuan_ship_area" th:text="${s.vd_name}">中国</span>
                 </p>
                 <p class="fr">
-                <a href="#" target="_blank"><span class="add_tuan_car">立即购买</span></a><!--<a  href="javascript:void(0)"  onclick="topic_dig('5264');return false;" ><span class="tuan_dig">+关注</span></a><span id="topic_dig_5264" class='dig_num'>33</span>-->
+                <a th:href="@{selpdbypt_id(pd_id=${s.pd_id})}" target="_blank"><span class="add_tuan_car">立即购买</span></a><!--<a  href="javascript:void(0)"  onclick="topic_dig('5264');return false;" ><span class="tuan_dig">+关注</span></a><span id="topic_dig_5264" class='dig_num'>33</span>-->
                 </p>
                 </div>
 
@@ -388,7 +391,7 @@
 	<SCRIPT type="text/javascript" src="js/baidu.js"></SCRIPT>
     
     <script type="text/javascript">
-    backToTop();
+//    backToTop();
     </script>
     <script type="text/javascript" src="js/lazyload.js"></script>
     <script type="text/javascript">
@@ -401,4 +404,5 @@
     });
     </script>
 
-</body></html>
+</body>
+</html>

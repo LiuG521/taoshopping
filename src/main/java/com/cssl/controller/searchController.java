@@ -53,9 +53,16 @@ public class searchController {
         if(all!=""&&all!=null){               //默认
             pages =  PageHelper.startPage(index,10,"pd_id");
         }else {
+
+        }
+        if(all==null&&pd_id==null&&pd_price==null){
             pages =  PageHelper.startPage(index,10);
         }
         List<Product_details> list =  seaService.findByPd(proD);
+        session.setAttribute("pd_price",pd_price);
+        session.setAttribute("pd_id",pd_id);
+        session.setAttribute("all",all);
+
         session.setAttribute("pd",list);
         session.setAttribute("index",index);
         session.setAttribute("pages",pages);
@@ -66,5 +73,10 @@ public class searchController {
     public String slsl(){
         System.out.println("12121");
         return "user/shopping-cart";
+    }
+
+    @RequestMapping("/index")
+    public String index(){
+        return "index";
     }
 }

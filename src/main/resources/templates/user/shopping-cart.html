@@ -1,8 +1,11 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org"/>
+
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>购物车</title>
+
+    <title>购物车</title>
 <link href="../css/base.css" rel="stylesheet" type="text/css" />
 <link rel="stylesheet" rev="stylesheet" href="../css/mobile.css" type="text/css" media="screen">
 <link href="../css/user.css" rel="stylesheet" type="text/css" />
@@ -171,7 +174,7 @@
     </script>
 
     <!------------cart---------------->
-    <div class="catbox">
+    <div class="catbox" th:if="${session.count}!=null and ${session.count} != 0">
     	<div class="title"><p>我的购物车<span>在线支付全场满¥150免运费</span></p></div>
         <table id="cartTable"  border="0" cellpadding="0" cellspacing="0">
             <thead>
@@ -185,38 +188,14 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr th:each="shop,state:${session.shopCar}">
                     <td class="checkbox"><input class="check-one check" type="checkbox"/></td>
                     <td class="goods"><a href="#"><img src="../images/01.jpg" width="100" height="100"/><span>清水软胶保护套 黄色<i>适配机型： 红米1S/红米</i></span></a></td>
-                    <td class="price">780元</td>
+                    <td class="price" ><span th:text="shop.Product_details.pd_price"></span></td>
                     <td class="count"><span class="reduce"></span><input class="count-input" type="text" value="1"/><span class="add">+</span></td>
                     <td class="subtotal">640.60</td>
                     <td class="operation"><span class="delete">X</span></td>
                 </tr>
-                <!--<tr>-->
-                    <!--<td class="checkbox"><input class="check-one check" type="checkbox"/></td>-->
-                    <!--<td class="goods"><a href="#"><img src="../images/02.jpg" width="100" height="100"/><span>清水软胶保护套 黄色<i>适配机型： 红米1S/红米</i></span></a></td>-->
-                    <!--<td class="price">3888.50元</td>-->
-                    <!--<td class="count"><span class="reduce"></span><input class="count-input" type="text" value="1"/><span class="add">+</span></td>-->
-                    <!--<td class="subtotal">640.60</td>-->
-                    <!--<td class="operation"><span class="delete">X</span></td>-->
-                <!--</tr>-->
-                <!--<tr>-->
-                    <!--<td class="checkbox"><input class="check-one check" type="checkbox"/></td>-->
-                    <!--<td class="goods"><a href="#"><img src="../images/01.jpg" width="100" height="100"/><span>清水软胶保护套 黄色<i>适配机型： 红米1S/红米</i></span></a></td>-->
-                    <!--<td class="price">1428.50元</td>-->
-                    <!--<td class="count"><span class="reduce"></span><input class="count-input" type="text" value="1"/><span class="add">+</span></td>-->
-                    <!--<td class="subtotal">640.60</td>-->
-                    <!--<td class="operation"><span class="delete">X</span></td>-->
-                <!--</tr>-->
-                <!--<tr>-->
-                    <!--<td class="checkbox"><input class="check-one check" type="checkbox"/></td>-->
-                    <!--<td class="goods"><a href="#"><img src="../images/01.jpg" width="100" height="100"/><span>清水软胶保护套 黄色<i>适配机型： 红米1S/红米</i></span></a></td>-->
-                    <!--<td class="price">640.60元</td>-->
-                    <!--<td class="count"><span class="reduce"></span><input class="count-input" type="text" value="1"/><span class="add">+</span></td>-->
-                    <!--<td class="subtotal">640.60</td>-->
-                    <!--<td class="operation"><span class="delete">X</span></td>-->
-                <!--</tr>-->
             </tbody>
         </table>
         
@@ -233,6 +212,15 @@
             <a href="../index.html" class="modify">继续购物</a>
         </div>
     
+    </div>
+
+    <div th:if="${session.count}==null or ${session.count}==0"  class="catbox" >
+        <div style="margin-bottom: 200px;"></div>
+        <div style="text-align: center; margin:0 auto;font-size: 24px; color: red">
+        <a >你的购物车还没有商品哦，先去主页逛逛吧！</a>
+        <div style="margin-bottom: 200px;"></div>
+        </div>
+
     </div>
     
     

@@ -3,6 +3,7 @@ package com.cssl.pojo;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -18,7 +19,7 @@ import java.util.TimerTask;
  */
 @Getter
 @Setter
-public class user {
+public class user implements Serializable {
     private Integer us_id;          //用户id
     private String us_account;      //用户账号
     private String us_password;     //用户密码

@@ -76,7 +76,9 @@
 
                 <div class="header_shopping_car mobile_none">
                     <div class="clear topcar">
-                        <div class="tuan_car_num fl"><a href="user/shopping-cart.html" >购物车 <span id="tuan_num">1</span> 件</a>
+                        <div class="tuan_car_num fl"  th:if="${session.count}==null"><a th:href="showShopCar" >购物车 <span id="tuan_num" th:text="${session.count}"></span></a>
+                        </div>
+                        <div class="tuan_car_num fl"  th:if="${session.count}!=null"><a th:href="showShopCar" >购物车 <span id="tuan_num" th:text="${session.count}"></span> 件</a>
                         </div>
                         <div class="car_love fl"><a href="https://shop116998991.taobao.com" >我喜欢的</a>
                         </div>
@@ -92,13 +94,13 @@
             <div class="w90">
                 <div class="clear nav_text">
                     <div class="nav_l">
-						<a href="index.html" class="index_i">首页</a>
+						<a href="index" class="index_i">首页</a>
                         <a href="usa.html">美国站</a>
                         <a href="usa.html" >日本站</a>
                         <a href="usa.html" >澳洲站</a> 
                         <a href="usa.html" >德国站</a>
                         <a href="usa.html" >韩国站</a>
-                        <a href="s.html" >全球精选</a>
+                        <a href="showAll" >全球精选</a>
 					</div>
 <!--                    <div class="nav_r">
                     	<a href="#" class="nav_zdm">全球值得买</a>

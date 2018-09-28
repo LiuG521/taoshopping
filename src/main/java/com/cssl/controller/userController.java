@@ -40,7 +40,7 @@ public class userController {
         if(usSerivce.userLogin(user)!=null){
             return "redirect:sel_product_type";
         }
-        return "login";
+        return "redirect:login.html";
     }
 
     //用户注册

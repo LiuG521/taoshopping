@@ -8,10 +8,10 @@
 (function (factory) {
 	if (typeof define === 'function' && define.amd) {
 		// AMD
-		define(['jquery'], factory);
+		define(['static/js/jquery'], factory);
 	} else if (typeof exports === 'object') {
 		// CommonJS
-		factory(require('jquery'));
+		factory(require('static/js/jquery'));
 	} else {
 		// Browser globals
 		factory(jQuery);

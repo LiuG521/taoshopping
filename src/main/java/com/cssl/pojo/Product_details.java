@@ -3,6 +3,7 @@ package com.cssl.pojo;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -10,7 +11,7 @@ import java.util.List;
  */
 @Getter
 @Setter
-public class Product_details {
+public class Product_details implements Serializable {
         private Integer pd_id; 	             //商品id
         private Integer pt_id;	             //商品类_商品类型
         private Integer pb_id;	             //商品品牌_品牌id

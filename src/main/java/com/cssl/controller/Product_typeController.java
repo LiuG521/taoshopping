@@ -33,7 +33,6 @@ public class Product_typeController {
         //登录上来就查询所有信息
         @RequestMapping("/sel_product_type")
         public String sel_product_type(Model model){
-                System.out.println("进来了");
                 List<Product_type> listpt=pts.sel_product_type();
                 model.addAttribute("Product_typelist",listpt);
                 for(int i=0;i<listpt.size();i++){
